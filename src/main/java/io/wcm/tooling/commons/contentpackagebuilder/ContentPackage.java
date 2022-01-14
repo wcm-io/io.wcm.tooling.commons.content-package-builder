@@ -43,6 +43,7 @@ import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.xml.XMLConstants;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -57,7 +58,6 @@ import org.apache.jackrabbit.vault.util.PlatformNameFormat;
 import org.w3c.dom.Document;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Charsets;
 
 import io.wcm.tooling.commons.contentpackagebuilder.ContentFolderSplitter.ContentPart;
 import io.wcm.tooling.commons.contentpackagebuilder.element.ContentElement;
@@ -85,6 +85,8 @@ public final class ContentPackage implements Closeable {
     this.zip = new ZipOutputStream(os);
 
     TransformerFactory transformerFactory = TransformerFactory.newInstance();
+    transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+    transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
     try {
       transformerFactory.setAttribute("indent-number", 2);
     }
@@ -348,7 +350,7 @@ public final class ContentPackage implements Closeable {
       }
       zip.putNextEntry(new ZipEntry(path));
       try {
-        zip.write(xmlContent.getBytes(Charsets.UTF_8));
+        zip.write(xmlContent.getBytes(StandardCharsets.UTF_8));
       }
       finally {
         zip.closeEntry();
