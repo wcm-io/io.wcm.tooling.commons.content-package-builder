@@ -27,6 +27,9 @@
       <action type="update" dev="sseifert">
         Switch to AEM 6.5 as minimum version.
       </action>
+      <action type="update" dev="sseifert">
+        Add support for XML namespace "wcmio" when building content packages.
+      </action>
     </release>
 
     <release version="1.6.2" date="2021-06-08">
@@ -69,7 +72,7 @@
     </release>
 
     <release version="1.4.4" date="2020-01-30">
-      <action type="fix" dev="mrozati" issue="WTOOL-56">
+      <action type="update" dev="mrozati" issue="WTOOL-56">
         Add support for XML namespace "granite" when building content packages.
       </action>
     </release>

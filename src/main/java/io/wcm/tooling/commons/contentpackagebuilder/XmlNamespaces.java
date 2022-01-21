@@ -79,6 +79,11 @@ public final class XmlNamespaces {
   public static final String NS_GRANITE = "http://www.adobe.com/jcr/granite/1.0";
 
   /**
+   * wcm.io namespace
+   */
+  public static final String NS_WCMIO = "http://wcm.io/ns";
+
+  /**
    * XML Namespaces support by default for JCR content XML.
    */
   public static final Map<String, String> DEFAULT_NAMESPACES = ImmutableMap.<String, String>builder()
@@ -92,6 +97,7 @@ public final class XmlNamespaces {
       .put("slingevent", NS_SLING_EVENT)
       .put("oak", NS_OAK)
       .put("granite", NS_GRANITE)
+      .put("wcmio", NS_WCMIO)
       .build();
 
   private XmlNamespaces() {
