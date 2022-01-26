@@ -442,7 +442,7 @@ final class ValueConverter {
     }
 
     @Override
-    public String getString() throws ValueFormatException, IllegalStateException, RepositoryException {
+    public String getString() {
       return value;
     }
 

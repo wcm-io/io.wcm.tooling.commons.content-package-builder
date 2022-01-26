@@ -20,3 +20,8 @@ AEM Pages can be created from a Map containing the page content. Nested maps mak
 Additionally binary files can be added.
 
 The result is a ZIP package that can be imported via CRX Package Manager in a AEM instance.
+
+
+### GitHub Repository
+
+Sources: https://github.com/wcm-io/io.wcm.tooling.commons.content-package-builder

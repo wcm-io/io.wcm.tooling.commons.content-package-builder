@@ -22,15 +22,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.wcm.tooling.commons</groupId>
-    <artifactId>io.wcm.tooling.commons.parent</artifactId>
-    <version>1.1.6</version>
-    <relativePath>../parent/pom.xml</relativePath>
+    <groupId>io.wcm</groupId>
+    <artifactId>io.wcm.parent_toplevel</artifactId>
+    <version>2.0.0</version>
+    <relativePath />
   </parent>
 
   <groupId>io.wcm.tooling.commons</groupId>
   <artifactId>io.wcm.tooling.commons.content-package-builder</artifactId>
-  <version>1.6.2</version>
+  <version>1.7.0</version>
   <packaging>jar</packaging>
 
   <name>AEM Content Package Builder</name>
@@ -38,9 +38,9 @@
   <url>${site.url}/${site.url.module.prefix}/</url>
 
   <scm>
-    <connection>scm:git:https://github.com/wcm-io/wcm-io-tooling.git</connection>
-    <developerConnection>scm:git:https://github.com/wcm-io/wcm-io-tooling.git</developerConnection>
-    <url>https://github.com/wcm-io/wcm-io-tooling</url>
+    <connection>scm:git:https://github.com/wcm-io/io.wcm.tooling.commons.content-package-builder.git</connection>
+    <developerConnection>scm:git:https://github.com/wcm-io/io.wcm.tooling.commons.content-package-builder.git</developerConnection>
+    <url>https://github.com/wcm-io/io.wcm.tooling.commons.content-package-builder</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -48,7 +48,7 @@
     <site.url.module.prefix>tooling/commons/content-package-builder</site.url.module.prefix>
 
     <!-- Enable reproducible builds -->
-    <project.build.outputTimestamp>2021-06-08T10:44:28Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2022-01-26T19:56:06Z</project.build.outputTimestamp>
   </properties>
 
   <dependencies>
@@ -197,13 +197,30 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <topSiteURL>${site.deploy.url}</topSiteURL>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <configuration>
+          <subDirectory>${site.url.module.prefix}</subDirectory>
+          <skipDeletedFiles>true</skipDeletedFiles>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 
   <distributionManagement>
     <site>
       <id>${site.deploy.id}</id>
-      <url>${site.deploy.url}/${site.url.module.prefix}</url>
+      <url>${site.deploy.url}</url>
     </site>
   </distributionManagement>
 
