@@ -2,7 +2,7 @@
 
 Java Library for building AEM Content Packages with content pages and binary files.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.wcm.tooling.commons/io.wcm.tooling.commons.content-package-builder/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.wcm.tooling.commons/io.wcm.tooling.commons.content-package-builder)
+[![Maven Central](https://img.shields.io/maven-central/v/io.wcm.tooling.commons/io.wcm.tooling.commons.content-package-builder)](https://repo1.maven.org/maven2/io/wcm/tooling/commons/io.wcm.tooling.commons.content-package-builder)
 
 ### Documentation
 
