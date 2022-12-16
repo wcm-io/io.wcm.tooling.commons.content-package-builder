@@ -31,6 +31,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -38,8 +39,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.w3c.dom.Document;
-
-import com.google.common.collect.ImmutableMap;
 
 import io.wcm.tooling.commons.contentpackagebuilder.element.ContentElementImpl;
 
@@ -129,8 +128,8 @@ class ContentPackageBuilderTest {
     ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test");
     try (ContentPackage contentPackage = builder.build(testFile)) {
       // add two content pages
-      contentPackage.addPage("/content/page1", new ContentElementImpl(null, ImmutableMap.<String, Object>of("var1", "v1")));
-      contentPackage.addPage("/content/ns:page2", new ContentElementImpl(null, ImmutableMap.<String, Object>of("var2", "v2")));
+      contentPackage.addPage("/content/page1", new ContentElementImpl(null, Map.of("var1", "v1")));
+      contentPackage.addPage("/content/ns:page2", new ContentElementImpl(null, Map.of("var2", "v2")));
     }
 
     // validate resulting XML
@@ -147,8 +146,8 @@ class ContentPackageBuilderTest {
     ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test");
     try (ContentPackage contentPackage = builder.build(testFile)) {
       // add two content pages
-      contentPackage.addPage("/content/page1", ImmutableMap.<String, Object>of("var1", "v1"));
-      contentPackage.addPage("/content/ns:page2", ImmutableMap.<String, Object>of("var2", "v2"));
+      contentPackage.addPage("/content/page1", Map.of("var1", "v1"));
+      contentPackage.addPage("/content/ns:page2", Map.of("var2", "v2"));
     }
 
     // validate resulting XML
@@ -167,7 +166,7 @@ class ContentPackageBuilderTest {
         .filter(new PackageFilter("/path2"));
     try (ContentPackage contentPackage = builder.build(testFile)) {
       // add some content
-      contentPackage.addContent("/content/node1", ImmutableMap.<String, Object>of("var1", "v1"));
+      contentPackage.addContent("/content/node1", Map.of("var1", "v1"));
       assertEquals(2, contentPackage.getFilters().size());
     }
 
@@ -184,8 +183,8 @@ class ContentPackageBuilderTest {
     ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test");
     try (ContentPackage contentPackage = builder.build(testFile)) {
       // add some content
-      contentPackage.addContent("/content/node1", new ContentElementImpl(null, ImmutableMap.<String, Object>of("var1", "v1")));
-      contentPackage.addContent("/content/node2", new ContentElementImpl(null, ImmutableMap.<String, Object>of("var2", "v2")));
+      contentPackage.addContent("/content/node1", new ContentElementImpl(null, Map.of("var1", "v1")));
+      contentPackage.addContent("/content/node2", new ContentElementImpl(null, Map.of("var2", "v2")));
     }
 
     // validate resulting XML
@@ -202,8 +201,8 @@ class ContentPackageBuilderTest {
     ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test");
     try (ContentPackage contentPackage = builder.build(testFile)) {
       // add some content
-      contentPackage.addContent("/content/node1", ImmutableMap.<String, Object>of("var1", "v1"));
-      contentPackage.addContent("/content/node2", ImmutableMap.<String, Object>of("var2", "v2"));
+      contentPackage.addContent("/content/node1", Map.of("var1", "v1"));
+      contentPackage.addContent("/content/node2", Map.of("var2", "v2"));
     }
 
     // validate resulting XML
@@ -221,9 +220,9 @@ class ContentPackageBuilderTest {
     try (ContentPackage contentPackage = builder.build(testFile)) {
       // add some content
       contentPackage.addContent("/content/node1",
-          ImmutableMap.of(JCR_PRIMARYTYPE, "sling:Folder", "var1", "v1",
-              "node11", ImmutableMap.of(JCR_PRIMARYTYPE, "sling:Folder", "var11", "v11",
-                  "node111", ImmutableMap.of(JCR_PRIMARYTYPE, "sling:Folder", "var111", "v111"))));
+          Map.of(JCR_PRIMARYTYPE, "sling:Folder", "var1", "v1",
+              "node11", Map.of(JCR_PRIMARYTYPE, "sling:Folder", "var11", "v11",
+                  "node111", Map.of(JCR_PRIMARYTYPE, "sling:Folder", "var111", "v111"))));
     }
 
     // validate resulting XML
@@ -244,7 +243,7 @@ class ContentPackageBuilderTest {
         .xmlNamespace(XmlUnitUtil.CUSTOM_NS_PREFIX, XmlUnitUtil.CUSTOM_NS_URI);
     try (ContentPackage contentPackage = builder.build(testFile)) {
       // add some content
-      contentPackage.addContent("/content/node1", ImmutableMap.<String, Object>of("myns:var1", "v1"));
+      contentPackage.addContent("/content/node1", Map.of("myns:var1", "v1"));
     }
 
     // validate resulting XML
@@ -258,7 +257,7 @@ class ContentPackageBuilderTest {
       ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test/*");
       try (ContentPackage contentPackage = builder.build(testFile)) {
         // add some content
-        contentPackage.addContent("/content/node1", ImmutableMap.<String, Object>of("var1", "v1"));
+        contentPackage.addContent("/content/node1", Map.of("var1", "v1"));
       }
     });
   }
@@ -269,7 +268,7 @@ class ContentPackageBuilderTest {
       ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test");
       try (ContentPackage contentPackage = builder.build(testFile)) {
         // add some content
-        contentPackage.addContent("/content/*", ImmutableMap.<String, Object>of("var1", "v1"));
+        contentPackage.addContent("/content/*", Map.of("var1", "v1"));
       }
     });
   }

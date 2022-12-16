@@ -27,10 +27,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.jupiter.api.Test;
-
-import com.google.common.collect.ImmutableMap;
 
 import io.wcm.tooling.commons.contentpackagebuilder.ContentFolderSplitter.ContentPart;
 
@@ -38,8 +37,8 @@ class ContentFolderSplitterTest {
 
   @Test
   void testSplitMap_NoNodeTypes() {
-    Map<String,Object> input = ImmutableMap.of("k1", "v1", "o1", ImmutableMap.of(
-        "k11", "v11", "k12", "v12", "o13", ImmutableMap.of(
+    Map<String, Object> input = Map.of("k1", "v1", "o1", Map.of(
+        "k11", "v11", "k12", "v12", "o13", Map.of(
             "k131", "v131", "k132", "v132")));
     List<ContentPart> result = ContentFolderSplitter.split(input);
     assertResult(result, "", input);
@@ -47,8 +46,8 @@ class ContentFolderSplitterTest {
 
   @Test
   void testSplitMap_Unstructured() {
-    Map<String, Object> input = ImmutableMap.of(JCR_PRIMARYTYPE, NT_UNSTRUCTURED, "k1", "v1", "o1", ImmutableMap.of(
-        JCR_PRIMARYTYPE, NT_UNSTRUCTURED, "k11", "v11", "k12", "v12", "o13", ImmutableMap.of(
+    Map<String, Object> input = Map.of(JCR_PRIMARYTYPE, NT_UNSTRUCTURED, "k1", "v1", "o1", Map.of(
+        JCR_PRIMARYTYPE, NT_UNSTRUCTURED, "k11", "v11", "k12", "v12", "o13", Map.of(
             JCR_PRIMARYTYPE, NT_UNSTRUCTURED, "k131", "v131", "k132", "v132")));
     List<ContentPart> result = ContentFolderSplitter.split(input);
     assertResult(result, "", input);
@@ -56,33 +55,33 @@ class ContentFolderSplitterTest {
 
   @Test
   void testSplitMap_Folder() {
-    Map<String, Object> input = ImmutableMap.of(JCR_PRIMARYTYPE, NT_FOLDER, "k1", "v1", "o1", ImmutableMap.of(
-        JCR_PRIMARYTYPE, "sling:Folder", "k11", "v11", "k12", "v12", "o13", ImmutableMap.of(
+    Map<String, Object> input = Map.of(JCR_PRIMARYTYPE, NT_FOLDER, "k1", "v1", "o1", Map.of(
+        JCR_PRIMARYTYPE, "sling:Folder", "k11", "v11", "k12", "v12", "o13", Map.of(
             JCR_PRIMARYTYPE, "sling:OrderedFolder", "k131", "v131", "k132", "v132")));
     List<ContentPart> result = ContentFolderSplitter.split(input);
     assertResult(result,
-        "", ImmutableMap.of(JCR_PRIMARYTYPE, NT_FOLDER, "k1", "v1"),
-        "/o1", ImmutableMap.of(JCR_PRIMARYTYPE, "sling:Folder", "k11", "v11", "k12", "v12"),
-        "/o1/o13", ImmutableMap.of(JCR_PRIMARYTYPE, "sling:OrderedFolder", "k131", "v131", "k132", "v132"));
+        "", Map.of(JCR_PRIMARYTYPE, NT_FOLDER, "k1", "v1"),
+        "/o1", Map.of(JCR_PRIMARYTYPE, "sling:Folder", "k11", "v11", "k12", "v12"),
+        "/o1/o13", Map.of(JCR_PRIMARYTYPE, "sling:OrderedFolder", "k131", "v131", "k132", "v132"));
   }
 
   @Test
   void testSplitMap_Page() {
-    Map<String, Object> page1Content = ImmutableMap.of("k1a", "v1a", "k1b", "v1b");
-    Map<String, Object> page11Content = ImmutableMap.of("k11a", "v11a", "k11b", "v11b");
-    Map<String, Object> page111Content = ImmutableMap.of("k111a", "v111a", "k111b", "v111b");
-    Map<String, Object> page12Content = ImmutableMap.of("k12a", "v12a", "k12b", "v12b");
-    Map<String, Object> input = ImmutableMap.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page1Content,
-        "page11", ImmutableMap.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page11Content,
-            "page111", ImmutableMap.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page111Content)),
-        "page12", ImmutableMap.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page12Content));
+    Map<String, Object> page1Content = Map.of("k1a", "v1a", "k1b", "v1b");
+    Map<String, Object> page11Content = Map.of("k11a", "v11a", "k11b", "v11b");
+    Map<String, Object> page111Content = Map.of("k111a", "v111a", "k111b", "v111b");
+    Map<String, Object> page12Content = Map.of("k12a", "v12a", "k12b", "v12b");
+    Map<String, Object> input = new TreeMap<>(Map.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page1Content,
+        "page11", Map.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page11Content,
+            "page111", Map.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page111Content)),
+        "page12", Map.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page12Content)));
 
     List<ContentPart> result = ContentFolderSplitter.split(input);
     assertResult(result,
-        "", ImmutableMap.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page1Content),
-        "/page11", ImmutableMap.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page11Content),
-        "/page11/page111", ImmutableMap.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page111Content),
-        "/page12", ImmutableMap.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page12Content));
+        "", Map.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page1Content),
+        "/page11", Map.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page11Content),
+        "/page11/page111", Map.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page111Content),
+        "/page12", Map.of(JCR_PRIMARYTYPE, "cq:Page", "jcr:content", page12Content));
   }
 
   @SuppressWarnings("unchecked")

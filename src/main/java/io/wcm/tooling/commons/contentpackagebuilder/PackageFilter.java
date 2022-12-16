@@ -22,9 +22,8 @@ package io.wcm.tooling.commons.contentpackagebuilder;
 import static io.wcm.tooling.commons.contentpackagebuilder.NameUtil.ensureValidPath;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
-import com.google.common.collect.ImmutableList;
 
 /**
  * Filter for AEM content package. Defines which content parts of the content package should be extracted when
@@ -78,7 +77,7 @@ public final class PackageFilter {
    * @return Get include/exclude rules
    */
   public List<PackageFilterRule> getRules() {
-    return ImmutableList.copyOf(rules);
+    return Collections.unmodifiableList(rules);
   }
 
 }

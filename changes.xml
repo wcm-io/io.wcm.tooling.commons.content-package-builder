@@ -30,6 +30,9 @@
       <action type="update" dev="sseifert">
         Switch to AEM 6.5.7 as minimum version.
       </action>
+      <action type="update" dev="sseifert">
+        Eliminate dependency to Guava.
+      </action>
     </release>
 
     <release version="1.7.0" date="2022-01-26">

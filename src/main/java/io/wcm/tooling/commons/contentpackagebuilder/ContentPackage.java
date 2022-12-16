@@ -57,8 +57,6 @@ import org.apache.jackrabbit.vault.packaging.PackageProperties;
 import org.apache.jackrabbit.vault.util.PlatformNameFormat;
 import org.w3c.dom.Document;
 
-import com.google.common.annotations.VisibleForTesting;
-
 import io.wcm.tooling.commons.contentpackagebuilder.ContentFolderSplitter.ContentPart;
 import io.wcm.tooling.commons.contentpackagebuilder.element.ContentElement;
 
@@ -244,7 +242,6 @@ public final class ContentPackage implements Closeable {
    * @param path Path
    * @return Safe path
    */
-  @VisibleForTesting
   @SuppressWarnings("PMD.UseStringBufferForStringAppends")
   static String buildJcrPathForZip(final String path) {
     String normalizedPath = StringUtils.defaultString(path);

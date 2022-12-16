@@ -21,18 +21,18 @@ package io.wcm.tooling.commons.contentpackagebuilder.element;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import java.util.Map;
 
-import com.google.common.collect.ImmutableMap;
+import org.junit.jupiter.api.Test;
 
 class ContentElementImplTest {
 
   @Test
   void testGetChild() throws Exception {
-    ContentElement root = new ContentElementImpl(null, ImmutableMap.<String, Object>of("prop1", "value1"));
-    ContentElement child1 = new ContentElementImpl("child1", ImmutableMap.<String, Object>of("prop1", "value2"));
-    ContentElement child11 = new ContentElementImpl("child11", ImmutableMap.<String, Object>of("prop1", "value3"));
-    ContentElement child2 = new ContentElementImpl("child2", ImmutableMap.<String, Object>of("prop1", "value4"));
+    ContentElement root = new ContentElementImpl(null, Map.of("prop1", "value1"));
+    ContentElement child1 = new ContentElementImpl("child1", Map.of("prop1", "value2"));
+    ContentElement child11 = new ContentElementImpl("child11", Map.of("prop1", "value3"));
+    ContentElement child2 = new ContentElementImpl("child2", Map.of("prop1", "value4"));
     root.getChildren().put("child1", child1);
     root.getChildren().put("child2", child2);
     child1.getChildren().put("child11", child11);
