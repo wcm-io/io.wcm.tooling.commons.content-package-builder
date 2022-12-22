@@ -7,7 +7,7 @@
 Java Library for building AEM Content Packages with content pages and binary files.
 
 Documentation: https://wcm.io/tooling/commons/content-package-builder/<br/>
-Issues: https://wcm-io.atlassian.net/browse/WTOOL<br/>
+Issues: https://github.com/wcm-io/io.wcm.tooling.commons.content-package-builder/issues<br/>
 Wiki: https://wcm-io.atlassian.net/wiki/<br/>
 Continuous Integration: https://github.com/wcm-io/io.wcm.tooling.commons.content-package-builder/actions<br/>
 Commercial support: https://wcm.io/commercial-support.html
