@@ -19,7 +19,7 @@
  */
 package io.wcm.tooling.commons.contentpackagebuilder;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import io.wcm.tooling.commons.contentpackagebuilder.element.ContentElement;
@@ -34,7 +34,7 @@ final class ContentElementConverter {
   }
 
   static Map<String, Object> toMap(ContentElement content) {
-    Map<String, Object> result = new HashMap<>();
+    Map<String, Object> result = new LinkedHashMap<>();
     result.putAll(content.getProperties());
     for (Map.Entry<String, ContentElement> entry : content.getChildren().entrySet()) {
       result.put(entry.getKey(), toMap(entry.getValue()));
