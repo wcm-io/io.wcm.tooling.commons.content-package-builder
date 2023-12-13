@@ -95,7 +95,7 @@ class ValueConverterTest {
   @Test
   void testInteger() {
     assertEquals("{Long}1", underTest.toString("prop", 1));
-    assertEquals("{Long}2", underTest.toString("prop", new Integer(2)));
+    assertEquals("{Long}2", underTest.toString("prop", Integer.valueOf(2)));
   }
 
   @Test
@@ -104,14 +104,14 @@ class ValueConverterTest {
         1, 2
     }));
     assertEquals("{Long}[1,2]", underTest.toString("prop", new Integer[] {
-        new Integer(1), new Integer(2)
+        Integer.valueOf(1), Integer.valueOf(2)
     }));
   }
 
   @Test
   void testLong() {
     assertEquals("{Long}10000000000", underTest.toString("prop", 10000000000L));
-    assertEquals("{Long}20000000000", underTest.toString("prop", new Long(20000000000L)));
+    assertEquals("{Long}20000000000", underTest.toString("prop", Long.valueOf(20000000000L)));
   }
 
   @Test
@@ -120,14 +120,14 @@ class ValueConverterTest {
         10000000000L, 20000000000L
     }));
     assertEquals("{Long}[10000000000,20000000000]", underTest.toString("prop", new Long[] {
-        new Long(10000000000L), new Long(20000000000L)
+        Long.valueOf(10000000000L), Long.valueOf(20000000000L)
     }));
   }
 
   @Test
   void testDouble() {
     assertEquals("{Decimal}1.234", underTest.toString("prop", 1.234d));
-    assertEquals("{Decimal}2.345", underTest.toString("prop", new Double(2.345d)));
+    assertEquals("{Decimal}2.345", underTest.toString("prop", Double.valueOf(2.345d)));
   }
 
   @Test
@@ -136,7 +136,7 @@ class ValueConverterTest {
         1.234d, 2.345d
     }));
     assertEquals("{Decimal}[1.234,2.345]", underTest.toString("prop", new Double[] {
-        new Double(1.234d), new Double(2.345d)
+        Double.valueOf(1.234d), Double.valueOf(2.345d)
     }));
   }
 
