@@ -34,7 +34,10 @@ class ContentElementConverterTest {
 
   @Test
   void testToMap() {
-    ContentElement root = new ContentElementImpl("root", new LinkedHashMap<>(Map.of("kra", "vra", "krb", "vrb")));
+    Map<String, Object> orderedRootProps = new LinkedHashMap<>();
+    orderedRootProps.put("kra", "vra");
+    orderedRootProps.put("krb", "vrb");
+    ContentElement root = new ContentElementImpl("root", orderedRootProps);
     ContentElement o1 = new ContentElementImpl("o1", Map.of("k1a", "v1a", "k1b", "v1b"));
     ContentElement o11 = new ContentElementImpl("o11", Map.of("k11a", "v11a", "k11b", "v11b"));
     ContentElement o2 = new ContentElementImpl("o2", Map.of("k2a", "v2a", "k2b", "v2b"));
