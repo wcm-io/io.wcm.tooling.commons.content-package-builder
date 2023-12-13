@@ -30,7 +30,7 @@
 
   <groupId>io.wcm.tooling.commons</groupId>
   <artifactId>io.wcm.tooling.commons.content-package-builder</artifactId>
-  <version>1.7.2</version>
+  <version>1.7.3-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>AEM Content Package Builder</name>
@@ -48,7 +48,7 @@
     <site.url.module.prefix>tooling/commons/content-package-builder</site.url.module.prefix>
 
     <!-- Enable reproducible builds -->
-    <project.build.outputTimestamp>2023-12-13T11:47:09Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2023-12-13T11:48:20Z</project.build.outputTimestamp>
   </properties>
 
   <dependencies>
