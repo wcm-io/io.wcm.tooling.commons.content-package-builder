@@ -32,6 +32,7 @@ import static org.apache.jackrabbit.vault.packaging.PackageProperties.NAME_VERSI
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -41,16 +42,12 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jackrabbit.util.ISO8601;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-
 /**
  * Package metadata.
  */
 final class PackageMetadata {
 
-  private static final Set<String> VALID_PACKAGE_TYPES = ImmutableSet.of(
+  private static final Set<String> VALID_PACKAGE_TYPES = Set.of(
       "application", "content", "container", "mixed");
 
   private String group;
@@ -126,7 +123,7 @@ final class PackageMetadata {
   }
 
   public List<PackageFilter> getFilters() {
-    return ImmutableList.copyOf(filters);
+    return Collections.unmodifiableList(filters);
   }
 
   public void addXmlNamespace(String prefix, String uri) {
@@ -141,7 +138,7 @@ final class PackageMetadata {
    * @return XML namespaces
    */
   public Map<String, String> getXmlNamespaces() {
-    return ImmutableMap.copyOf(this.xmlNamespaces);
+    return Collections.unmodifiableMap(this.xmlNamespaces);
   }
 
   /**
@@ -197,7 +194,7 @@ final class PackageMetadata {
     }
     vars.put("allowIndexDefinitions", allowIndexDefinitions);
     vars.putAll(additionalProperties);
-    return ImmutableMap.copyOf(vars);
+    return Collections.unmodifiableMap(vars);
   }
 
 }

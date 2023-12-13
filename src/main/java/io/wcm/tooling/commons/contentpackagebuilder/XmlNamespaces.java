@@ -19,9 +19,9 @@
  */
 package io.wcm.tooling.commons.contentpackagebuilder;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
-
-import com.google.common.collect.ImmutableMap;
 
 /**
  * XML namespaces supported by default.
@@ -86,19 +86,22 @@ public final class XmlNamespaces {
   /**
    * XML Namespaces support by default for JCR content XML.
    */
-  public static final Map<String, String> DEFAULT_NAMESPACES = ImmutableMap.<String, String>builder()
-      .put("jcr", NS_JCR)
-      .put("nt", NS_JCR_NT)
-      .put("rep", NS_JCR_REP)
-      .put("cq", NS_CQ)
-      .put("dam", NS_DAM)
-      .put("crx", NS_CRX)
-      .put("sling", NS_SLING)
-      .put("slingevent", NS_SLING_EVENT)
-      .put("oak", NS_OAK)
-      .put("granite", NS_GRANITE)
-      .put("wcmio", NS_WCMIO)
-      .build();
+  public static final Map<String, String> DEFAULT_NAMESPACES;
+  static {
+    Map<String,String> ns = new HashMap<>();
+    ns.put("jcr", NS_JCR);
+    ns.put("nt", NS_JCR_NT);
+    ns.put("rep", NS_JCR_REP);
+    ns.put("cq", NS_CQ);
+    ns.put("dam", NS_DAM);
+    ns.put("crx", NS_CRX);
+    ns.put("sling", NS_SLING);
+    ns.put("slingevent", NS_SLING_EVENT);
+    ns.put("oak", NS_OAK);
+    ns.put("granite", NS_GRANITE);
+    ns.put("wcmio", NS_WCMIO);
+    DEFAULT_NAMESPACES = Collections.unmodifiableMap(ns);
+  }
 
   private XmlNamespaces() {
     // constants only

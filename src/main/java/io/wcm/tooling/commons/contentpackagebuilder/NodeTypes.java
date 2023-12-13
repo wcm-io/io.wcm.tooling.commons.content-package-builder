@@ -24,8 +24,6 @@ import java.util.Set;
 
 import org.apache.jackrabbit.JcrConstants;
 
-import com.google.common.collect.ImmutableSet;
-
 /**
  * Node type helper methods.
  */
@@ -34,7 +32,7 @@ final class NodeTypes {
   /**
    * Nodes with this node types should be put into an own folder in the filevault filesystem structure.
    */
-  private static final Set<String> FOLDER_NODETYPES = ImmutableSet.of(
+  private static final Set<String> FOLDER_NODETYPES = Set.of(
       "nt:folder",
       "sling:Folder",
       "sling:OrderedFolder",

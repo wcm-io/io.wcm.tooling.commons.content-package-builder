@@ -23,14 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xmlunit.xpath.JAXPXPathEngine;
 import org.xmlunit.xpath.XPathEngine;
-
-import com.google.common.collect.ImmutableMap;
 
 public final class XmlUnitUtil {
 
@@ -39,11 +39,10 @@ public final class XmlUnitUtil {
 
   private static final XPathEngine XPATH_ENGINE = new JAXPXPathEngine();
   static {
-    Map<String, String> namespaces = ImmutableMap.<String, String>builder()
-        .putAll(XmlNamespaces.DEFAULT_NAMESPACES)
-        .put(CUSTOM_NS_PREFIX, CUSTOM_NS_URI)
-        .build();
-    XPATH_ENGINE.setNamespaceContext(namespaces);
+    Map<String, String> namespaces = new HashMap<>();
+    namespaces.putAll(XmlNamespaces.DEFAULT_NAMESPACES);
+    namespaces.put(CUSTOM_NS_PREFIX, CUSTOM_NS_URI);
+    XPATH_ENGINE.setNamespaceContext(Collections.unmodifiableMap(namespaces));
   }
 
   private XmlUnitUtil() {
