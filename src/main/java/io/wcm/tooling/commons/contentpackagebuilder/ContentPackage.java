@@ -36,10 +36,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -51,10 +53,12 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jackrabbit.vault.packaging.PackageProperties;
 import org.apache.jackrabbit.vault.util.PlatformNameFormat;
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 
 import io.wcm.tooling.commons.contentpackagebuilder.ContentFolderSplitter.ContentPart;
@@ -71,6 +75,7 @@ public final class ContentPackage implements Closeable {
   private final ZipOutputStream zip;
   private final Transformer transformer;
   private final XmlContentBuilder xmlContentBuilder;
+  private final Set<String> folderPaths = new HashSet<>();
 
   private static final String CONTENT_TYPE_CHARSET_EXTENSION = ";charset=";
   private static final String DOT_DIR_FOLDER = ".dir";
@@ -322,7 +327,7 @@ public final class ContentPackage implements Closeable {
     // package thumbnail
     byte[] thumbnailImage = metadata.getThumbnailImage();
     if (thumbnailImage != null) {
-      zip.putNextEntry(new ZipEntry(META_DIR + "/definition/thumbnail.png"));
+      zipPutNextFileEntry(META_DIR + "/definition/thumbnail.png");
       try {
         zip.write(thumbnailImage);
       }
@@ -345,7 +350,7 @@ public final class ContentPackage implements Closeable {
         xmlContent = StringUtils.replace(xmlContent, "{{" + entry.getKey() + "}}",
             org.apache.commons.lang3.StringEscapeUtils.escapeXml10(entry.getValue().toString()));
       }
-      zip.putNextEntry(new ZipEntry(path));
+      zipPutNextFileEntry(path);
       try {
         zip.write(xmlContent.getBytes(StandardCharsets.UTF_8));
       }
@@ -372,7 +377,7 @@ public final class ContentPackage implements Closeable {
       }
     }
 
-    zip.putNextEntry(new ZipEntry(path));
+    zipPutNextFileEntry(path);
     try {
       properties.storeToXML(zip, null);
     }
@@ -388,7 +393,7 @@ public final class ContentPackage implements Closeable {
    * @throws IOException I/O exception
    */
   private void writeXmlDocument(String path, Document doc) throws IOException {
-    zip.putNextEntry(new ZipEntry(path));
+    zipPutNextFileEntry(path);
     try {
       DOMSource source = new DOMSource(doc);
       StreamResult result = new StreamResult(zip);
@@ -409,13 +414,43 @@ public final class ContentPackage implements Closeable {
    * @throws IOException I/O exception
    */
   private void writeBinaryFile(String path, InputStream is) throws IOException {
-    zip.putNextEntry(new ZipEntry(path));
+    zipPutNextFileEntry(path);
     try {
       IOUtils.copy(is, zip);
     }
     finally {
       zip.closeEntry();
     }
+  }
+
+  /**
+   * Creates a new ZIP entry for a file with given paths.
+   * Ensures that entries for the parent folders are created before.
+   * @param path File path
+   * @throws IOException I/O exception
+   */
+  private void zipPutNextFileEntry(@NotNull String path) throws IOException {
+    String folderPath = FilenameUtils.getPath(path);
+    ensureFolderPaths(folderPath);
+    zip.putNextEntry(new ZipEntry(path));
+  }
+
+  /**
+   * Ensures that zip entries for the given folder and it's parend folders (if they do not exist already).
+   * @param folderPath Folder path
+   * @throws IOException I/O exception
+   */
+  private void ensureFolderPaths(@NotNull String folderPath) throws IOException {
+    if (folderPaths.contains(folderPath) || StringUtils.isEmpty(folderPath) || StringUtils.equals(folderPath, "/")) {
+      // skip paths already created and root folder
+      return;
+    }
+    // ensure parent folders
+    String parentFolderPath = FilenameUtils.getPath(StringUtils.removeEnd(folderPath, "/"));
+    ensureFolderPaths(parentFolderPath);
+    // create folder ZIP entry
+    zip.putNextEntry(new ZipEntry(folderPath));
+    folderPaths.add(folderPath);
   }
 
 }
