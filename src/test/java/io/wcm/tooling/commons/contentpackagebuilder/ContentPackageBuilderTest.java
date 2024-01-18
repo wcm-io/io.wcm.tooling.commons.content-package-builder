@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -39,6 +40,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.w3c.dom.Document;
+import org.zeroturnaround.zip.ZipUtil;
 
 import io.wcm.tooling.commons.contentpackagebuilder.element.ContentElementImpl;
 
@@ -90,6 +92,10 @@ class ContentPackageBuilderTest {
       assertEquals("/content/mypath", contentPackage.getRootPath());
     }
 
+    ensureFolder("META-INF/");
+    ensureFolder("META-INF/vault/");
+    ensureFolder("META-INF/vault/definition/");
+
     // validate metadata files
     Document configXml = getXmlFromZip("META-INF/vault/config.xml");
     assertXpathEvaluatesTo("1.1", "/vaultfs/@version", configXml);
@@ -132,6 +138,11 @@ class ContentPackageBuilderTest {
       contentPackage.addPage("/content/ns:page2", new ContentElementImpl(null, Map.of("var2", "v2")));
     }
 
+    ensureFolder("jcr_root/");
+    ensureFolder("jcr_root/content/");
+    ensureFolder("jcr_root/content/page1/");
+    ensureFolder("jcr_root/content/_ns_page2/");
+
     // validate resulting XML
     Document page1Xml = getXmlFromZip("jcr_root/content/page1/.content.xml");
     assertXpathEvaluatesTo("v1", "/jcr:root/jcr:content/@var1", page1Xml);
@@ -149,6 +160,11 @@ class ContentPackageBuilderTest {
       contentPackage.addPage("/content/page1", Map.of("var1", "v1"));
       contentPackage.addPage("/content/ns:page2", Map.of("var2", "v2"));
     }
+
+    ensureFolder("jcr_root/");
+    ensureFolder("jcr_root/content/");
+    ensureFolder("jcr_root/content/page1/");
+    ensureFolder("jcr_root/content/_ns_page2/");
 
     // validate resulting XML
     Document page1Xml = getXmlFromZip("jcr_root/content/page1/.content.xml");
@@ -292,6 +308,9 @@ class ContentPackageBuilderTest {
 
     }
 
+    ensureFolder("jcr_root/");
+    ensureFolder("jcr_root/content/");
+
     // validate resulting files
     assertArrayEquals(data1, getDataFromZip("jcr_root/content/file1.txt"));
     Document metaXml = getXmlFromZip("jcr_root/content/file1.txt.dir/.content.xml");
@@ -308,4 +327,9 @@ class ContentPackageBuilderTest {
   private Document getXmlFromZip(String path) throws Exception {
     return ContentPackageTestUtil.getXmlFromZip(testFile, path);
   }
+
+  private void ensureFolder(String path) throws Exception {
+    assertTrue(ZipUtil.containsEntry(testFile, path), "Folder exists: " + path);
+  }
+
 }
