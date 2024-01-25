@@ -27,9 +27,6 @@
       <action type="update" dev="sseifert" issue="2">
         Ensure folder path ZIP file entries are created.
       </action>
-      <action type="update" dev="sseifert">
-        Switch to AEM 6.5.17 as minimum version.
-      </action>
     </release>
 
     <release version="1.7.2" date="2023-12-13">
