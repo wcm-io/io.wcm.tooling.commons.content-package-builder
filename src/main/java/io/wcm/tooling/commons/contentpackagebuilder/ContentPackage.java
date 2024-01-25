@@ -83,6 +83,7 @@ public final class ContentPackage implements Closeable {
   /**
    * @param os Output stream
    */
+  @SuppressWarnings("java:S1141") // nested try-catch
   ContentPackage(PackageMetadata metadata, OutputStream os) throws IOException {
     this.metadata = metadata;
     this.zip = new ZipOutputStream(os);
@@ -112,7 +113,7 @@ public final class ContentPackage implements Closeable {
       }
     }
     catch (TransformerException ex) {
-      throw new RuntimeException("Failed to set up XML transformer: " + ex.getMessage(), ex);
+      throw new IllegalStateException("Failed to set up XML transformer: " + ex.getMessage(), ex);
     }
 
     this.xmlContentBuilder = new XmlContentBuilder(metadata.getXmlNamespaces());

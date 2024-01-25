@@ -44,6 +44,7 @@ import org.zeroturnaround.zip.ZipUtil;
 
 import io.wcm.tooling.commons.contentpackagebuilder.element.ContentElementImpl;
 
+@SuppressWarnings("java:S5778") // assert throws
 class ContentPackageBuilderTest {
 
   private static final DocumentBuilderFactory DOCUMENT_BUILDER_FACTORY = DocumentBuilderFactory.newInstance();

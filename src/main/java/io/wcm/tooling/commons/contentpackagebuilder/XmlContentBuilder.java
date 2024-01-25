@@ -59,7 +59,7 @@ final class XmlContentBuilder {
       this.documentBuilder.setEntityResolver(new PropertiesEntityResolver());
     }
     catch (ParserConfigurationException ex) {
-      throw new RuntimeException("Failed to set up XML document builder: " + ex.getMessage(), ex);
+      throw new IllegalStateException("Failed to set up XML document builder: " + ex.getMessage(), ex);
     }
     this.xmlNamespaces = xmlNamespaces;
   }
