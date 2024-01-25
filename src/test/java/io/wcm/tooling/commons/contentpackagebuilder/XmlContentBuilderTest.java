@@ -34,6 +34,7 @@ import org.w3c.dom.Document;
 import io.wcm.tooling.commons.contentpackagebuilder.element.ContentElement;
 import io.wcm.tooling.commons.contentpackagebuilder.element.ContentElementImpl;
 
+@SuppressWarnings("java:S5778") // assert throws
 class XmlContentBuilderTest {
 
   private XmlContentBuilder underTest;
