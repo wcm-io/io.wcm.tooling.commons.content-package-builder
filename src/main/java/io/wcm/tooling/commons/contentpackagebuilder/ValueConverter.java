@@ -73,7 +73,7 @@ final class ValueConverter {
           lastPropertyType = values[i].getType();
         }
         else if (lastPropertyType != values[i].getType()) {
-          throw new RuntimeException("Mixing different value types within array not allowed: " +
+          throw new IllegalArgumentException("Mixing different value types within array not allowed: " +
               PropertyType.nameFromValue(lastPropertyType) + ", " + PropertyType.nameFromValue(values[i].getType())
               + ", propertyName=" + propertyName + ", value=" + value);
         }
@@ -88,7 +88,7 @@ final class ValueConverter {
       return DocViewProperty.format(prop);
     }
     catch (RepositoryException ex) {
-      throw new RuntimeException("Unable to format property value (" + propertyName + "): " + value, ex);
+      throw new IllegalStateException("Unable to format property value (" + propertyName + "): " + value, ex);
     }
   }
 

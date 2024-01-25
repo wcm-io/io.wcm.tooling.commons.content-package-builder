@@ -33,6 +33,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("java:S5778") // assert throws
 class ValueConverterTest {
 
   private ValueConverter underTest;
