@@ -27,7 +27,8 @@ import java.util.Map;
 public interface ContentElement {
 
   /**
-   * @return Resource name. The root resource has no name (null).
+   * Resource name. The root resource has no name (null).
+   * @return Resource name
    */
   String getName();
 

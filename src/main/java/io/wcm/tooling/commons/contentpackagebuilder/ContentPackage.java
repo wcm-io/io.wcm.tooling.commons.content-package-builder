@@ -183,10 +183,12 @@ public final class ContentPackage implements Closeable {
 
   /**
    * Add some JCR content structure directly to the package.
+   *
    * <p>
    * This method is used to provide additional properties for a path that is already used by a binary file,
    * using a special <code>&lt;node-name&gt;.dir/.content.xml</code> syntax.
    * </p>
+   *
    * @param path Full content path of content root/file node.
    * @param content Hierarchy of content elements.
    * @throws IOException I/O exception
@@ -197,10 +199,12 @@ public final class ContentPackage implements Closeable {
 
   /**
    * Add some JCR content structure directly to the package.
+   *
    * <p>
    * This method is used to provide additional properties for a path that is already used by a binary file,
    * using a special <code>&lt;node-name&gt;.dir/.content.xml</code> syntax.
    * </p>
+   *
    * @param path Full content path of content root/file node.
    * @param content Map with node properties. If the map contains nested maps this builds a tree of JCR nodes.
    *          The key of the nested map in its parent map is the node name,

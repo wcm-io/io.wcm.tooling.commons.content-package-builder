@@ -45,7 +45,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testPageSimpleMap() throws Exception {
+  void testPageSimpleMap() {
     Document doc = underTest.buildPage(Map.of(
         "var1", "v1",
         "var2", 55,
@@ -60,7 +60,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testPageNestedMaps() throws Exception {
+  void testPageNestedMaps() {
     Document doc = underTest.buildPage(Map.of(
         "var1", "v1",
         "var2", 55,
@@ -85,7 +85,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testContentSimpleMap() throws Exception {
+  void testContentSimpleMap() {
     Document doc = underTest.buildContent(Map.of(
         "jcr:primaryType", "myPrimaryType",
         "var1", "v1",
@@ -103,7 +103,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testContentWithSpecialElementNames() throws Exception {
+  void testContentWithSpecialElementNames() {
     Document doc = underTest.buildContent(Map.of(
         "0abc", "v1",
         "abc#def", Map.of("prop1", "v2"),
@@ -114,7 +114,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testContentNestedMaps() throws Exception {
+  void testContentNestedMaps() {
     Document doc = underTest.buildContent(Map.of(
         "var1", "v1",
         "var2", 55,
@@ -138,7 +138,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testContentElementHierarchy() throws Exception {
+  void testContentElementHierarchy() {
     ContentElement root = new ContentElementImpl(null, Map.of(
         "var1", "v1",
         "var2", 55));
@@ -165,7 +165,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testNtFile() throws Exception {
+  void testNtFile() {
     Document doc = underTest.buildNtFile("myMime", "myEncoding");
 
     assertXpathEvaluatesTo("nt:file", "/jcr:root/@jcr:primaryType", doc);
@@ -176,7 +176,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testNtFileNoMime() throws Exception {
+  void testNtFileNoMime() {
     Document doc = underTest.buildNtFile(null, null);
 
     assertXpathEvaluatesTo("nt:file", "/jcr:root/@jcr:primaryType", doc);
@@ -187,7 +187,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testBuildFilter() throws Exception {
+  void testBuildFilter() {
     List<PackageFilter> filters = List.of(
         new PackageFilter("/path1"),
         new PackageFilter("/path2").addIncludeRule("/pattern1").addExcludeRule("/pattern2").addIncludeRule("/pattern3"));
@@ -208,7 +208,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testMapInvalidNodeName() throws Exception {
+  void testMapInvalidNodeName() {
     assertThrows(IllegalArgumentException.class, () -> {
       underTest.buildContent(Map.of(
           "node1", Map.of(XmlContentBuilder.PN_PRIMARY_TYPE, "myNodeType", "var1", "v1"),
@@ -217,7 +217,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testMapInvalidAttributeName() throws Exception {
+  void testMapInvalidAttributeName() {
     assertThrows(IllegalArgumentException.class, () -> {
       underTest.buildContent(Map.of(
           "node1", Map.of(XmlContentBuilder.PN_PRIMARY_TYPE, "myNodeType", "var1", "v1"),
@@ -226,7 +226,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testContentElementInvalidNodeName() throws Exception {
+  void testContentElementInvalidNodeName() {
     assertThrows(IllegalArgumentException.class, () -> {
       ContentElement root = new ContentElementImpl(null, Map.of(
           "var1", "v1",
@@ -239,7 +239,7 @@ class XmlContentBuilderTest {
   }
 
   @Test
-  void testContentElementAttributeName() throws Exception {
+  void testContentElementAttributeName() {
     assertThrows(IllegalArgumentException.class, () -> {
       ContentElement root = new ContentElementImpl(null, Map.of(
           "var1", "v1",
