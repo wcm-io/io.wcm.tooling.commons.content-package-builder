@@ -24,7 +24,7 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
-    <release version="1.7.6" date="not released">
+    <release version="1.7.6" date="2025-06-18">
       <action type="update" dev="sseifert" issue="12">
         Ensure all ZIP entries are created using the same timestamp as the "created" property from content package metadata (reproducible builds).
       </action>
