@@ -26,6 +26,9 @@
 
     <release version="1.7.6" date="not released">
       <action type="update" dev="sseifert">
+        Ensure all ZIP entries are created using the same timestamp as the "created" property from content package metadata (reproducible builds).
+      </action>
+      <action type="update" dev="sseifert">
         Switch to AEM 6.5.17 as minimum version.
       </action>
     </release>
