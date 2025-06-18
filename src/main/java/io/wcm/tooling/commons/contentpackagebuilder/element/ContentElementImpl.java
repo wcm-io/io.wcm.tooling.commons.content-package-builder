@@ -34,6 +34,7 @@ public final class ContentElementImpl implements ContentElement {
   private final Map<String, ContentElement> children = new LinkedHashMap<>();
 
   /**
+   * Constructor
    * @param name Element name
    * @param properties Properties
    */

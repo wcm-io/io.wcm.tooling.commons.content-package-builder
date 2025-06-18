@@ -8,7 +8,7 @@ Java Library for building AEM Content Packages with content pages and binary fil
 
 * [Usage](usage.html)
 * [API documentation](apidocs/)
-* [Changelog](changes-report.html)
+* [Changelog](changes.html)
 
 
 ### Overview

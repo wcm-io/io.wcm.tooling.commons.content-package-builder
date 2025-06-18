@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 class ContentElementImplTest {
 
   @Test
-  void testGetChild() throws Exception {
+  void testGetChild() {
     ContentElement root = new ContentElementImpl(null, Map.of("prop1", "value1"));
     ContentElement child1 = new ContentElementImpl("child1", Map.of("prop1", "value2"));
     ContentElement child11 = new ContentElementImpl("child11", Map.of("prop1", "value3"));

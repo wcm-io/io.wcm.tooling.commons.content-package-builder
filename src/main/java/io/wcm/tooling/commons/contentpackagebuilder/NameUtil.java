@@ -83,7 +83,7 @@ final class NameUtil {
     }
     String[] pathParts = StringUtils.split(relativePath, "/");
     for (String pathPart : pathParts) {
-      if (!NameUtil.isValidName(pathPart)) {
+      if (!isValidName(pathPart)) {
         throw new IllegalArgumentException("Path contains illegal node names: " + path);
       }
     }

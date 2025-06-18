@@ -269,7 +269,7 @@ class ContentPackageBuilderTest {
   }
 
   @Test
-  void testIllegalRootPath() throws Exception {
+  void testIllegalRootPath() {
     assertThrows(IllegalArgumentException.class, () -> {
       ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test/*");
       try (ContentPackage contentPackage = builder.build(testFile)) {
@@ -280,7 +280,7 @@ class ContentPackageBuilderTest {
   }
 
   @Test
-  void testIllegalContentPath() throws Exception {
+  void testIllegalContentPath() {
     assertThrows(IllegalArgumentException.class, () -> {
       ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test");
       try (ContentPackage contentPackage = builder.build(testFile)) {
@@ -329,7 +329,7 @@ class ContentPackageBuilderTest {
     return ContentPackageTestUtil.getXmlFromZip(testFile, path);
   }
 
-  private void ensureFolder(String path) throws Exception {
+  private void ensureFolder(String path) {
     assertTrue(ZipUtil.containsEntry(testFile, path), "Folder exists: " + path);
   }
 

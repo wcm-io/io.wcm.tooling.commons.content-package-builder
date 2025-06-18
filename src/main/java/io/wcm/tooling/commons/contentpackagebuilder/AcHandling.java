@@ -59,7 +59,8 @@ public enum AcHandling {
   }
 
   /**
-   * @return ACL handling mode string for package properties.
+   * ACL handling mode string for package properties.
+   * @return Mode
    */
   public String getMode() {
     return mode;

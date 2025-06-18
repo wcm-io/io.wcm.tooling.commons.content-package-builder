@@ -72,6 +72,7 @@ import io.wcm.tooling.commons.contentpackagebuilder.element.ContentElement;
 public final class ContentPackage implements Closeable {
 
   private final PackageMetadata metadata;
+  private final long entryTime;
   private final ZipOutputStream zip;
   private final Transformer transformer;
   private final XmlContentBuilder xmlContentBuilder;
@@ -86,6 +87,7 @@ public final class ContentPackage implements Closeable {
   @SuppressWarnings("java:S1141") // nested try-catch
   ContentPackage(PackageMetadata metadata, OutputStream os) throws IOException {
     this.metadata = metadata;
+    this.entryTime = metadata.getCreated().getTime();
     this.zip = new ZipOutputStream(os);
 
     TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -183,10 +185,12 @@ public final class ContentPackage implements Closeable {
 
   /**
    * Add some JCR content structure directly to the package.
+   *
    * <p>
    * This method is used to provide additional properties for a path that is already used by a binary file,
    * using a special <code>&lt;node-name&gt;.dir/.content.xml</code> syntax.
    * </p>
+   *
    * @param path Full content path of content root/file node.
    * @param content Hierarchy of content elements.
    * @throws IOException I/O exception
@@ -197,10 +201,12 @@ public final class ContentPackage implements Closeable {
 
   /**
    * Add some JCR content structure directly to the package.
+   *
    * <p>
    * This method is used to provide additional properties for a path that is already used by a binary file,
    * using a special <code>&lt;node-name&gt;.dir/.content.xml</code> syntax.
    * </p>
+   *
    * @param path Full content path of content root/file node.
    * @param content Map with node properties. If the map contains nested maps this builds a tree of JCR nodes.
    *          The key of the nested map in its parent map is the node name,
@@ -433,7 +439,7 @@ public final class ContentPackage implements Closeable {
   private void zipPutNextFileEntry(@NotNull String path) throws IOException {
     String folderPath = FilenameUtils.getPath(path);
     ensureFolderPaths(folderPath);
-    zip.putNextEntry(new ZipEntry(path));
+    zip.putNextEntry(newZipEntry(path));
   }
 
   /**
@@ -450,8 +456,14 @@ public final class ContentPackage implements Closeable {
     String parentFolderPath = FilenameUtils.getPath(StringUtils.removeEnd(folderPath, "/"));
     ensureFolderPaths(parentFolderPath);
     // create folder ZIP entry
-    zip.putNextEntry(new ZipEntry(folderPath));
+    zip.putNextEntry(newZipEntry(folderPath));
     folderPaths.add(folderPath);
+  }
+
+  private ZipEntry newZipEntry(String path) {
+    ZipEntry entry = new ZipEntry(path);
+    entry.setTime(this.entryTime);
+    return entry;
   }
 
 }
