@@ -41,6 +41,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jackrabbit.util.ISO8601;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Package metadata.
@@ -90,8 +91,13 @@ final class PackageMetadata {
     this.createdBy = createdBy;
   }
 
-  public void setCreated(Date created) {
+  public void setCreated(@NotNull Date created) {
     this.created = created;
+  }
+
+  @NotNull
+  Date getCreated() {
+    return this.created;
   }
 
   public void setVersion(String version) {
