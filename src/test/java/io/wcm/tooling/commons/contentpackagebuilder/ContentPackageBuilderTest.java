@@ -179,8 +179,8 @@ class ContentPackageBuilderTest {
   void testAddContentMultipleFilters() throws Exception {
 
     ContentPackageBuilder builder = underTest.group("myGroup").name("myName")
-        .filter(new PackageFilter("/path1"))
-        .filter(new PackageFilter("/path2"));
+      .filter(new PackageFilter("/path1"))
+      .filter(new PackageFilter("/path2"));
     try (ContentPackage contentPackage = builder.build(testFile)) {
       // add some content
       contentPackage.addContent("/content/node1", Map.of("var1", "v1"));
@@ -257,7 +257,7 @@ class ContentPackageBuilderTest {
   void testAddContentCustomNamespace() throws Exception {
 
     ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test")
-        .xmlNamespace(XmlUnitUtil.CUSTOM_NS_PREFIX, XmlUnitUtil.CUSTOM_NS_URI);
+      .xmlNamespace(XmlUnitUtil.CUSTOM_NS_PREFIX, XmlUnitUtil.CUSTOM_NS_URI);
     try (ContentPackage contentPackage = builder.build(testFile)) {
       // add some content
       contentPackage.addContent("/content/node1", Map.of("myns:var1", "v1"));
@@ -294,7 +294,9 @@ class ContentPackageBuilderTest {
   void testAddBinaries() throws Exception {
 
     byte[] data1 = "content1".getBytes(StandardCharsets.UTF_8);
-    byte[] data2 = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 };
+    byte[] data2 = new byte[] {
+        0x01, 0x02, 0x03, 0x04, 0x05
+    };
 
     ContentPackageBuilder builder = underTest.group("myGroup").name("myName").rootPath("/test");
     try (ContentPackage contentPackage = builder.build(testFile)) {

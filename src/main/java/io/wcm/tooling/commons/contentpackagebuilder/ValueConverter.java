@@ -80,7 +80,9 @@ final class ValueConverter {
       }
     }
     else {
-      values = new Value[] { toValue(propertyName, value) };
+      values = new Value[] {
+          toValue(propertyName, value)
+      };
     }
 
     Property prop = new MockProperty(propertyName, multiple, values);

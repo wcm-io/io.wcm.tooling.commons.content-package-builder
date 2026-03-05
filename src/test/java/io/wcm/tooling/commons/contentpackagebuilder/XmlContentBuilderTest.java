@@ -66,8 +66,7 @@ class XmlContentBuilderTest {
         "var2", 55,
         "node1", Map.of(XmlContentBuilder.PN_PRIMARY_TYPE, "myNodeType", "var3", "v3"),
         "node2", Map.of("var4", "v4",
-            "node21", Map.of("var5", "v5"))
-        ));
+            "node21", Map.of("var5", "v5"))));
 
     assertXpathEvaluatesTo("cq:Page", "/jcr:root/@jcr:primaryType", doc);
     assertXpathEvaluatesTo("cq:PageContent", "/jcr:root/jcr:content/@jcr:primaryType", doc);
@@ -93,7 +92,7 @@ class XmlContentBuilderTest {
         "var3", new String[] {
             "v1", "v2", "v3"
         },
-        "granite:data", new String[]{
+        "granite:data", new String[] {
             "data-1", "data-2"
         }));
     assertXpathEvaluatesTo("myPrimaryType", "/jcr:root/@jcr:primaryType", doc);
@@ -120,8 +119,7 @@ class XmlContentBuilderTest {
         "var2", 55,
         "node1", Map.of(XmlContentBuilder.PN_PRIMARY_TYPE, "myNodeType", "var3", "v3"),
         "node2", Map.of("var4", "v4",
-            "node21", Map.of("var5", "v5"))
-        ));
+            "node21", Map.of("var5", "v5"))));
 
     assertXpathEvaluatesTo("nt:unstructured", "/jcr:root/@jcr:primaryType", doc);
     assertXpathEvaluatesTo("v1", "/jcr:root/@var1", doc);

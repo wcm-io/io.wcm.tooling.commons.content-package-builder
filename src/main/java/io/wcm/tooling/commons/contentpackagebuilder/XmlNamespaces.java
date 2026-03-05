@@ -88,7 +88,7 @@ public final class XmlNamespaces {
    */
   public static final Map<String, String> DEFAULT_NAMESPACES;
   static {
-    Map<String,String> ns = new HashMap<>();
+    Map<String, String> ns = new HashMap<>();
     ns.put("jcr", NS_JCR);
     ns.put("nt", NS_JCR_NT);
     ns.put("rep", NS_JCR_REP);

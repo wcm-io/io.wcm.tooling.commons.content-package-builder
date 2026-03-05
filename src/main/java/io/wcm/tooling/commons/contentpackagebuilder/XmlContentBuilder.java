@@ -215,7 +215,7 @@ final class XmlContentBuilder {
 
   @SuppressWarnings("unchecked")
   private void exportPayload(Document doc, Element element, Map<String, Object> content) {
-    for (Map.Entry<String,Object> entry : content.entrySet()) {
+    for (Map.Entry<String, Object> entry : content.entrySet()) {
       Object value = entry.getValue();
       if (value == null) {
         continue;
