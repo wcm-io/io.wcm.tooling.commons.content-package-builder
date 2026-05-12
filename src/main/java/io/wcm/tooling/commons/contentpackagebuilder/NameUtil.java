@@ -22,6 +22,7 @@ package io.wcm.tooling.commons.contentpackagebuilder;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -75,7 +76,7 @@ final class NameUtil {
    */
   public static void ensureValidPath(String path) {
     String relativePath;
-    if (StringUtils.startsWith(path, "/")) {
+    if (Strings.CS.startsWith(path, "/")) {
       relativePath = path.substring(1);
     }
     else {

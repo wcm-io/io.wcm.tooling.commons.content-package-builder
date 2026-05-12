@@ -40,7 +40,7 @@ import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.jackrabbit.util.ISO8601;
 import org.apache.jackrabbit.vault.util.DocViewProperty;
 
@@ -96,7 +96,7 @@ final class ValueConverter {
 
   private Value toValue(String propertyName, Object value) {
     if (value instanceof String) {
-      if (StringUtils.equals(propertyName, PN_PRIVILEGES)) {
+      if (Strings.CS.equals(propertyName, PN_PRIVILEGES)) {
         return new MockValue(value.toString(), PropertyType.NAME);
       }
       else {

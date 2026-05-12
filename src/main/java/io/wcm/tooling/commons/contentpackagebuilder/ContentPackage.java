@@ -56,6 +56,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.jackrabbit.vault.packaging.PackageProperties;
 import org.apache.jackrabbit.vault.util.PlatformNameFormat;
 import org.jetbrains.annotations.NotNull;
@@ -448,12 +449,12 @@ public final class ContentPackage implements Closeable {
    * @throws IOException I/O exception
    */
   private void ensureFolderPaths(@NotNull String folderPath) throws IOException {
-    if (folderPaths.contains(folderPath) || StringUtils.isEmpty(folderPath) || StringUtils.equals(folderPath, "/")) {
+    if (folderPaths.contains(folderPath) || StringUtils.isEmpty(folderPath) || Strings.CS.equals(folderPath, "/")) {
       // skip paths already created and root folder
       return;
     }
     // ensure parent folders
-    String parentFolderPath = FilenameUtils.getPath(StringUtils.removeEnd(folderPath, "/"));
+    String parentFolderPath = FilenameUtils.getPath(Strings.CS.removeEnd(folderPath, "/"));
     ensureFolderPaths(parentFolderPath);
     // create folder ZIP entry
     zip.putNextEntry(newZipEntry(folderPath));

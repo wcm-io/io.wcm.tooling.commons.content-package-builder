@@ -28,7 +28,7 @@ import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -155,12 +155,12 @@ class ValueConverterTest {
 
   @Test
   void testDate() {
-    assertTrue(StringUtils.startsWith(underTest.toString("prop", sampleDate), "{Date}2010-09-05T15:10:20"));
+    assertTrue(Strings.CS.startsWith(underTest.toString("prop", sampleDate), "{Date}2010-09-05T15:10:20"));
   }
 
   @Test
   void testCalendar() {
-    assertTrue(StringUtils.startsWith(underTest.toString("prop", DateUtils.toCalendar(sampleDate)), "{Date}2010-09-05T15:10:20"));
+    assertTrue(Strings.CS.startsWith(underTest.toString("prop", DateUtils.toCalendar(sampleDate)), "{Date}2010-09-05T15:10:20"));
   }
 
   @Test

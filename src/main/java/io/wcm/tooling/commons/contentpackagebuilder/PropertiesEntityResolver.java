@@ -22,7 +22,7 @@ package io.wcm.tooling.commons.contentpackagebuilder;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -33,7 +33,7 @@ class PropertiesEntityResolver implements EntityResolver {
 
   @Override
   public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
-    if (StringUtils.equals(systemId, PROPERTIES_DTD)) {
+    if (Strings.CS.equals(systemId, PROPERTIES_DTD)) {
       InputStream is = getClass().getResourceAsStream("/entities/properties.dtd");
       return new InputSource(is);
     }

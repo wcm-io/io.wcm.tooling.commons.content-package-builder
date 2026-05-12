@@ -23,12 +23,14 @@ import static io.wcm.tooling.commons.contentpackagebuilder.XmlNamespaces.NS_JCR;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.jackrabbit.util.ISO9075;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -102,7 +104,7 @@ final class XmlContentBuilder {
   public Document buildContent(ContentElement content) {
     Document doc = documentBuilder.newDocument();
 
-    String primaryType = StringUtils.defaultString((String)content.getProperties().get(PN_PRIMARY_TYPE), NT_UNSTRUCTURED);
+    String primaryType = Objects.toString(content.getProperties().get(PN_PRIMARY_TYPE), NT_UNSTRUCTURED);
     Element jcrRoot = createJcrRoot(doc, primaryType);
 
     exportPayload(doc, jcrRoot, content);
@@ -118,7 +120,7 @@ final class XmlContentBuilder {
   public Document buildContent(Map<String, Object> content) {
     Document doc = documentBuilder.newDocument();
 
-    String primaryType = StringUtils.defaultString((String)content.get(PN_PRIMARY_TYPE), NT_UNSTRUCTURED);
+    String primaryType = Objects.toString(content.get(PN_PRIMARY_TYPE), NT_UNSTRUCTURED);
     Element jcrRoot = createJcrRoot(doc, primaryType);
 
     exportPayload(doc, jcrRoot, content);
@@ -257,7 +259,7 @@ final class XmlContentBuilder {
   }
 
   private String getNamespace(String key) {
-    if (!StringUtils.contains(key, ":")) {
+    if (!Strings.CS.contains(key, ":")) {
       return null;
     }
     String nsPrefix = StringUtils.substringBefore(key, ":");
